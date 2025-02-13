@@ -16,4 +16,3 @@ def find_words(word):
                 result.append(clean_line)
             
     return result
-print(find_words('яблоко'))
