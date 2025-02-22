@@ -7,9 +7,9 @@ load_dotenv()
 def start(update: Update, context: CallbackContext) -> None:
     update.message.reply_text("Отправьте мне слово и я выведу слова, которые можно из него составить")
 
-def echo(update: Update, context: CallbackContext) -> None:
+def words(update: Update, context: CallbackContext) -> None:
     user_message = update.message.text
-    result = find_words(user_message)
+    result = find_words(user_message.lower())
     update.message.reply_text(f"Вот {len(result)} Слов из слова {user_message}: {', '.join(result)}")
 
 def main():
@@ -21,7 +21,7 @@ def main():
 
     dispatcher.add_handler(CommandHandler("start", start))
 
-    dispatcher.add_handler(MessageHandler(Filters.text & ~Filters.command, echo))
+    dispatcher.add_handler(MessageHandler(Filters.text & ~Filters.command, words))
 
     updater.start_polling()
 
